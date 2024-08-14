@@ -5,6 +5,12 @@
 html {
   scroll-behavior: smooth;
 }
+@font-face {
+  font-family: 'Bahij TheSansArabic';
+  src: url('@/assets/fonts/Bahij_TheSansArabic-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
 .ibm-plex-sans-arabic-thin {
   font-family: "IBM Plex Sans Arabic", sans-serif;
   font-weight: 100;

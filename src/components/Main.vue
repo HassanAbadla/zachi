@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import CardVertical from './CardVertical.vue';
-import { Pagination } from 'swiper/modules';
+import Modal from './Modal.vue'
+import { FreeMode, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import 'swiper/css/free-mode';
 
 const onSwiper = (swiper) => {
   console.log(swiper);
@@ -14,43 +16,52 @@ const onSwiper = (swiper) => {
 const onSlideChange = () => {
   console.log('slide change');
 };
-const modules = [Pagination];
-const slidesPerView = 1;
-const spaceBetween = ref(10);
+const modules = [FreeMode, Pagination];
+// const slidesPerView = 1;
+// const spaceBetween = ref(10);
 const breakpoints = ref({
   '670': {
     slidesPerView: 2,
-    spaceBetween: 20,
+    spaceBetween: 5,
   },
   '950': {
     slidesPerView: 3,
-    spaceBetween: 10,
+    spaceBetween: 7,
   },
   '1240': {
     slidesPerView: 4,
-    spaceBetween: 15,
+    spaceBetween: 5,
   },
   '1740': {
-    slidesPerView: 5,
-    spaceBetween: 15,
+    slidesPerView: 5.8,
+    spaceBetween: 0,
   },
-  '2140': {
-    slidesPerView: 6,
-    spaceBetween: 15,
+  '2240': {
+    slidesPerView: 2,
+    spaceBetween: 2,
   },
 });
+const showModal = ref(false)
+
+function handleConfirm() {
+  // Handle the confirm action
+  showModal.value = false
+}
+
+const showLang = ref(false)
+const showBranch = ref(false)
 </script>
 
 <template>
-  <header class="relative">
+  <header class="">
     <img class="header_img" src="@/assets/images/header.jpg" alt="">
-    <div class="sticky w-full bottom-0 z-40">
-      <div class="nav_menu border-b">
-        <h2 class="text-gray-700 text-3xl font-bold tracking-wider">زاتشي</h2>
-        <div class="flex flex-row-reverse items-center gap-4">
-          <div class="flex items-center gap-1">
+    <div class="">
+      <div class="nav_menu border-b pb-2">
+          <h2 class="text-black text-3xl font-bold tracking-wide">زاتشي</h2>
+        <div class="flex flex-row-reverse items-center gap-6 ">
+          <div class="flex items-center gap-2 font-Bahij font-bold px-3">
             إعدادات
-            <svg version="1.1" class="bg-gray-900 text-white rounded-full p-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <svg version="1.1" class="bg-gray-900 text-white w-12 h-12 rounded-full p-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
               viewBox="0 0 256 256" width="28" height="28" enable-background="new 0 0 256 256" xml:space="preserve">
               <g>
                 <g>
@@ -62,35 +73,91 @@ const breakpoints = ref({
               </g>
             </svg>
           </div>
-          <div class="flex items-center gap-1">
-            عربي
-            <svg version="1.1" class=" text-white rounded-full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-              viewBox="0 0 256 256" width="28" height="28" enable-background="new 0 0 256 256" xml:space="preserve">
-              <g>
-                <path fill="#000"
-                  d="M166.4,77.8c4.4,13.3,10.3,23.6,20.7,34c8.9-8.9,14.8-20.7,19.2-34H166.4z M69,151.6h38.4L88.2,99.9 L69,151.6z" />
-                <path fill="#000"
-                  d="M216.5,9.9h-177C23.3,9.9,10,23.2,10,39.4v177.2c0,16.2,13.3,29.5,29.5,29.5h177 c16.2,0,29.5-13.3,29.5-29.5V39.4C246,23.2,234.2,9.9,216.5,9.9L216.5,9.9z M144.2,200.3c-2.9,3-5.9,3-8.8,3c-1.5,0-4.4,0-5.9-1.5 c-1.5-1.5-3,0-3-1.5s-1.5-3-2.9-5.9c-1.5-3-1.5-4.4-3-7.4l-5.9-16.2H63.1l-5.9,16.2c-2.9,5.9-4.4,10.3-5.9,13.3c-1.5,3-4.4,3-8.8,3 c-3,0-5.9-1.5-8.9-3c-2.9-3-4.4-4.4-4.4-7.4c0-1.5,0-3,1.5-5.9c1.5-3,1.5-4.4,2.9-7.4L66,97c1.5-3,1.5-5.9,3-8.9 c1.5-3,2.9-5.9,4.4-7.4c1.5-1.5,3-4.4,5.9-5.9c3-1.5,5.9-1.5,8.9-1.5c2.9,0,5.9,0,8.8,1.5c2.9,1.5,4.4,3,5.9,5.9 c1.5,1.5,2.9,4.4,4.4,7.4c1.5,3,3,5.9,4.4,10.3l32.4,81.2c3,5.9,4.4,10.3,4.4,13.3C147.2,194.4,145.7,197.4,144.2,200.3z  M225.4,142.8c-16.2-5.9-28-13.3-38.4-22.1c-10.3,10.3-23.6,17.7-39.8,22.1l-4.4-7.4c16.2-4.4,29.5-10.3,39.8-20.7 c-10.3-10.3-19.2-23.6-22.1-38.4h-14.7v-5.9h39.8c-3-4.4-5.9-10.3-8.9-14.8l4.4-1.5c3,4.4,7.4,10.3,10.3,16.2h36.9v7.4h-14.8 c-4.4,14.8-11.8,28.1-20.6,36.9c10.3,8.9,22.1,16.2,38.4,20.7L225.4,142.8L225.4,142.8z" />
-              </g>
-            </svg>
-          </div>
-          <div class="flex items-center gap-1">
-            فرع ام الفحم
-            <svg version="1.1" class=" text-white rounded-full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-              viewBox="0 0 256 256" width="28" height="28" enable-background="new 0 0 256 256" xml:space="preserve">
+          <div @click="showLang = !showLang" class="flex flex-row-reverse items-center hover:bg-[#ecf6fb] cursor-pointer"
+                  id="menu-button" aria-expanded="true" aria-haspopup="true">
+            <svg class="w-12 h-12 p-2 rounded-full bg-[#c2e8ef]" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256"
+              xml:space="preserve">
               <g>
                 <g>
                   <path fill="#000000"
-                    d="M227.5,10h-199C18.3,10,10,18.3,10,28.5v199c0,10.2,8.3,18.5,18.5,18.5h199c10.2,0,18.5-8.3,18.5-18.5v-199C246,18.3,237.7,10,227.5,10z M195.4,79.2h-0.5l0-0.2L195.4,79.2z M69.9,56h116.2c3.9,0,7,2.8,7,6.3c0,3.5-3.1,6.3-7,6.3H69.9c-3.8,0-7-2.8-7-6.3C63,58.8,66.1,56,69.9,56z M195.4,191.7c0,3.7-4.7,8.4-8.9,8.4H69.6c-4.2,0-8.9-4.7-8.9-8.4v-43.9h11.6l0,0v41.8h111.5v-41.8c0,0,1.6,0,2.3,0h9.3V191.7L195.4,191.7z M189,135.5c-11.2,0-20.3-8.9-20.3-19.9c0,11-9.1,19.9-20.3,19.9c-11.2,0-20.3-8.9-20.3-19.9c0,11-9.1,19.9-20.3,19.9s-20.3-8.9-20.3-19.9c0,11-9.1,19.9-20.3,19.9s-20.3-8.9-20.3-19.9l13.9-36.4h134.3l14.5,36.4C209.3,126.6,200.2,135.5,189,135.5z" />
+                    d="M243.1,138.3c-7.4-20.1-27.9-32.2-55-32.2c-1.1,0-2.1,0-3.1,0.1l-0.2-24.3c0,0,40.2-6.9,41.6-7.2s1.6-1.4,1.3-2.7c-0.3-1.3-2-10.4-2.2-11.5c-0.3-1.5-1.2-1.5-2.4-1.3s-38.3,5.4-38.3,5.4s-0.1-23-0.1-24.5c0-1.5-0.8-1.9-2.3-1.8c-1.5,0-10.9,0.2-12.1,0.2c-1.2,0-1.9,0.6-1.9,1.8c0,1.2,0.4,27.2,0.4,27.2s-36.1,6.2-37.1,6.4c-1,0.2-2,0.6-1.8,1.7s2.2,12.9,2.5,13.8c0.2,0.9,0.8,1.5,2.2,1.3c1.3-0.2,34.5-5.9,34.5-5.9l0.4,23.8c-12.7,3.3-21.2,9.7-26.6,15.4c-9.1,9.5-14.2,22.3-14.2,35c0,18.7,11.5,29.8,27.5,31.8c37.3,4.6,60.4-36.1,68.1-55.6c13,17.8,3,51.4-24.7,70.6c-0.5,0.3-1.2,1.5-0.4,2.4c0.8,0.9,6.4,7.8,7.3,8.9c0.9,1.1,2.4,0.7,3,0.3C238.8,196.8,252.4,163.9,243.1,138.3z M155.9,176c-11.4-1.4-11.1-10.8-11.1-17.1c0-9.1,3.9-18.6,10.3-25.4c3.9-4.2,8.8-7.3,14.5-9.4l1,50.5C166,176,161.2,176.6,155.9,176z M184.6,169.4l0.6-48.5c1,0,2-0.1,3-0.1c9.1,0,17.6,1.7,22.3,4.3C214.9,127.7,198.2,157.1,184.6,169.4z M78.9,79c-0.4-1.1-1.2-1.7-2.3-1.7h-23c-1.1,0-2,0.6-2.3,1.7c-4.9,15.3-41.1,129.7-41.3,130.3c-0.2,0.6-0.1,0.9,0.7,0.9h20.4c0.9,0,1.2-0.3,1.3-0.8c0.2-0.6,11.9-39.2,11.9-39.2h41.3c0,0,11.7,38.6,11.9,39.2c0.2,0.6,0.5,0.8,1.3,0.8h20.5c0.8,0,0.9-0.3,0.7-0.9C120,208.6,83.8,94.3,78.9,79z M48.1,153.5l17.1-61.9l17.1,61.9H48.1z" />
                 </g>
               </g>
             </svg>
+            <div class="relative inline-block text-right ">
+              <div>
+                <div
+                  class="inline-flex flex-col w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2  hover:bg-[#ecf6fb] cursor-pointer" >
+                  <p class="text-lg font-Bahij font-bold">عربي</p>
+                  <div class="flex flex-row-reverse items-end gap-2">
+                    <p class="font-Bahij text-xs ">English</p>
+                    <svg class="-mr-1 h-5 w-5 font-bold" viewBox="0 0 20 20" fill="black" aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div v-if="showLang"
+                class="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                <div class="py-1" role="none">
+                  <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">English</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                    id="menu-item-1">French</a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="flex items-center justify-between gap-5 bg-[#50a6df] p-5 rounded-2xl">
-            <p class="text-white">20 ₪</p>
+
+          <div @click="showBranch = !showBranch" class="flex flex-row-reverse items-center hover:bg-[#ecf6fb] cursor-pointer"
+            id="menu-button" aria-expanded="true" aria-haspopup="true">
+            <div class="h-12 w-12 bg-[#c2e8ef] rounded-full"></div>
+            <!-- <svg class="w-12 h-12 p-2 rounded-full bg-[#c2e8ef]" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256"
+              xml:space="preserve">
+              <g>
+                <g>
+                  <path fill="#000000"
+                    d="M243.1,138.3c-7.4-20.1-27.9-32.2-55-32.2c-1.1,0-2.1,0-3.1,0.1l-0.2-24.3c0,0,40.2-6.9,41.6-7.2s1.6-1.4,1.3-2.7c-0.3-1.3-2-10.4-2.2-11.5c-0.3-1.5-1.2-1.5-2.4-1.3s-38.3,5.4-38.3,5.4s-0.1-23-0.1-24.5c0-1.5-0.8-1.9-2.3-1.8c-1.5,0-10.9,0.2-12.1,0.2c-1.2,0-1.9,0.6-1.9,1.8c0,1.2,0.4,27.2,0.4,27.2s-36.1,6.2-37.1,6.4c-1,0.2-2,0.6-1.8,1.7s2.2,12.9,2.5,13.8c0.2,0.9,0.8,1.5,2.2,1.3c1.3-0.2,34.5-5.9,34.5-5.9l0.4,23.8c-12.7,3.3-21.2,9.7-26.6,15.4c-9.1,9.5-14.2,22.3-14.2,35c0,18.7,11.5,29.8,27.5,31.8c37.3,4.6,60.4-36.1,68.1-55.6c13,17.8,3,51.4-24.7,70.6c-0.5,0.3-1.2,1.5-0.4,2.4c0.8,0.9,6.4,7.8,7.3,8.9c0.9,1.1,2.4,0.7,3,0.3C238.8,196.8,252.4,163.9,243.1,138.3z M155.9,176c-11.4-1.4-11.1-10.8-11.1-17.1c0-9.1,3.9-18.6,10.3-25.4c3.9-4.2,8.8-7.3,14.5-9.4l1,50.5C166,176,161.2,176.6,155.9,176z M184.6,169.4l0.6-48.5c1,0,2-0.1,3-0.1c9.1,0,17.6,1.7,22.3,4.3C214.9,127.7,198.2,157.1,184.6,169.4z M78.9,79c-0.4-1.1-1.2-1.7-2.3-1.7h-23c-1.1,0-2,0.6-2.3,1.7c-4.9,15.3-41.1,129.7-41.3,130.3c-0.2,0.6-0.1,0.9,0.7,0.9h20.4c0.9,0,1.2-0.3,1.3-0.8c0.2-0.6,11.9-39.2,11.9-39.2h41.3c0,0,11.7,38.6,11.9,39.2c0.2,0.6,0.5,0.8,1.3,0.8h20.5c0.8,0,0.9-0.3,0.7-0.9C120,208.6,83.8,94.3,78.9,79z M48.1,153.5l17.1-61.9l17.1,61.9H48.1z" />
+                </g>
+              </g>
+            </svg> -->
+            <div class="relative inline-block text-right ">
+              <div>
+                <div
+                  class="inline-flex flex-col w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2  hover:bg-[#ecf6fb] cursor-pointer">
+                  <p class="text-[15px] font-Bahij font-bold">فرع ام الفحم</p>
+                  <div class="flex flex-row-reverse items-end gap-2">
+                    <p class="flex flex-row-reverse gap-1 items-center font-Bahij text-xs p-0 m-0"><span class="h-3 w-3 bg-green-500 rounded-full p-1"></span>مفتوح الآن</p>
+                    <svg class="-mr-1 h-5 w-5 font-bold" viewBox="0 0 20 20" fill="black" aria-hidden="true">
+                      <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div v-if="showBranch"
+                class="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                <div class="py-1" role="none">
+                  <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">القدس</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                    id="menu-item-1">جنين</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-5 bg-[#50a6df] px-5 py-3 rounded-lg">
+            <p class="text-white mr-4 text-[22px]">20 ₪</p>
             <div class="flex items-center gap-2">
-              <p class="text-white">الطلبية</p>
-              <span class="bg-white text-[#50a6df] px-2 rounded-full">5</span>
+              <p class="text-white text-[20px] font-bold">الطلبية</p>
+              <span class="bg-white font-bold text-[20px] text-[#50a6df] px-[9px] rounded-full">5</span>
             </div>
           </div>
         </div>
@@ -99,7 +166,7 @@ const breakpoints = ref({
       <nav class="flex items-center justify-between py-4 px-9 shadow-xl shadow-gray-500/20">
         <div class="relative">
           <input type="text"
-            class="w-full px-4 py-2 pr-8 rounded-full border-none bg-gray-100 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-4 py-3 pr-8  rounded-full border-none bg-gray-100 border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="بحث..."  dir="rtl"/>
           <div class="absolute inset-y-0 right-0 flex items-center pr-3">
             <svg class="h-5 w-5 text-gray-400 -mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -121,14 +188,16 @@ const breakpoints = ref({
     </div>
   </header>
 
-  <main class="px-12 py-4" dir="rtl">
-    <div class="pt-6">
-      <div class="py-2" id="burger">
-        <h2 class="text-2xl font-bold text-gray-800">برجر</h2>
-        <swiper :modules="modules" :space-between="spaceBetween" :pagination="{
-          clickable: true}" @swiper="onSwiper" @slideChange="onSlideChange" :breakpoints="breakpoints">
+  <main class="md:px-12 md:py-4" dir="rtl">
+    <div class="pt-4">
+      <div class="pb-4" id="burger">
+        <div class="flex items-center justify-between">
+          <h2 class="text-[38px] font-bold text-black">برجر</h2>
+          <a href="#" class="px-5 py-1 text-[#4da0db] bg-[#ecf6fb] rounded-full font-bold hover:bg-[#def4ff]">الكل</a>
+        </div>
+        <swiper :modules="modules" :freeMode="true"  @swiper="onSwiper" @slideChange="onSlideChange" :breakpoints="breakpoints">
           <swiper-slide>
-            <div class="py-4">
+            <div class="py-4 cursor-pointer" @click="showModal = true">
               <CardVertical />
             </div>
           </swiper-slide>
@@ -170,10 +239,12 @@ const breakpoints = ref({
         </swiper>
       </div>
 
-      <div class="py-2" id="salad">
-        <h2 class="text-2xl font-bold text-gray-800">سلطات</h2>
-        <swiper :modules="modules" :space-between="spaceBetween" :pagination="{
-          clickable: true}" @swiper="onSwiper" @slideChange="onSlideChange" :breakpoints="breakpoints">
+      <div class="py-4" id="salad">
+        <div class="flex items-center justify-between">
+          <h2 class="text-[38px] font-bold text-black">سلطات</h2>
+          <a href="#" class="px-5 py-1 text-[#4da0db] bg-[#ecf6fb] rounded-full font-bold hover:bg-[#def4ff]">الكل</a>
+        </div>
+        <swiper :modules="modules" :space-between="spaceBetween"  @swiper="onSwiper" @slideChange="onSlideChange" :breakpoints="breakpoints">
           <swiper-slide>
             <div class="py-4">
               <CardVertical />
@@ -218,11 +289,12 @@ const breakpoints = ref({
       </div>
     </div>
 
-    <div class="py-2" id="tortia">
-      <h2 class="text-2xl font-bold text-gray-800">ترتيا</h2>
-        <swiper :modules="modules" :space-between="spaceBetween" :pagination="{
-          clickable: true
-        }" @swiper="onSwiper" @slideChange="onSlideChange" :breakpoints="breakpoints">
+    <div class="py-4" id="tortia">
+      <div class="flex items-center justify-between">
+        <h2 class="text-[38px] font-bold text-black">تورتيا</h2>
+        <a href="#" class="px-5 py-1 text-[#4da0db] bg-[#ecf6fb] rounded-full font-bold hover:bg-[#def4ff]">الكل</a>
+      </div>
+        <swiper :modules="modules" :space-between="spaceBetween"  @swiper="onSwiper" @slideChange="onSlideChange" :breakpoints="breakpoints">
           <swiper-slide>
             <div class="py-4">
               <CardVertical />
@@ -266,6 +338,9 @@ const breakpoints = ref({
         </swiper>
       </div>
   </main>
+  <Modal :show="showModal" title="باجيت شوارما عجل"
+    description="ميامي هو مشروب المشروب المحامي ميامي المشروب هو المشروب ميامي هو مشروب المشروب المحامي ميامي المشروب"
+    @close="showModal = false" @confirm="handleConfirm" />
 
 </template>
 

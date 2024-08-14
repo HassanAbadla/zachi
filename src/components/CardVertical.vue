@@ -6,7 +6,8 @@
   <div class="relative bg-white shadow-lg rounded-lg overflow-hidden w-72">
     <img class=" w-full h-48 object-cover" src="@/assets/images/burger.jpg" alt="Burger Image">
     <button class="absolute top-1 left-1 z-10 text-[#439bd9] bg-[#d6effa] hover:bg-[#c1eafc] font-bold py-2 px-2 rounded-full">
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24" height="24" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+      <svg class="h-7 w-7 p-1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
         <g>
           <g>
             <g>
@@ -17,11 +18,9 @@
         </g>
       </svg>
     </button>
-    <div class="p-6" dir="rtl">
-      <h2 class="text-2xl font-bold text-gray-800 mb-2">برچشیف دیل</h2>
-      <p class="text-gray-600 text-base mb-4">
-        وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف
-        وصف وصف وصف وصف وصف
+    <div class="p-4" dir="rtl">
+      <h2 class="text-base font-bold mb-2">برجر شيف دبل</h2>
+      <p class="text-xs font-bold mb-2 ">وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصف وصوصف وصف وصف وصف وصف وصف وصف وصف وصف
       </p>
       <div class="flex justify-between items-center">
         <span class="text-[#439bd9] font-bold text-lg">20₪</span>

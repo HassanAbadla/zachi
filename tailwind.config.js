@@ -6,7 +6,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Bahij: ['Bahij TheSansArabic', 'sans-serif'],
+        IBMPlex: ['"IBM Plex Sans Arabic"', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
