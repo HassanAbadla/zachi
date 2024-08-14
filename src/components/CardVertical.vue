@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="relative bg-white shadow-lg rounded-lg overflow-hidden w-72">
+  <div class="relative bg-white shadow-lg rounded-lg overflow-hidden w-64">
     <img class=" w-full h-48 object-cover" src="@/assets/images/burger.jpg" alt="Burger Image">
     <button class="absolute top-1 left-1 z-10 text-[#439bd9] bg-[#d6effa] hover:bg-[#c1eafc] font-bold py-2 px-2 rounded-full">
       <svg class="h-7 w-7 p-1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

@@ -33,7 +33,7 @@ const breakpoints = ref({
     spaceBetween: 5,
   },
   '1740': {
-    slidesPerView: 5.8,
+    slidesPerView: 6.1,
     spaceBetween: 0,
   },
   '2240': {
